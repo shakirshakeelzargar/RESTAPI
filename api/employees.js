@@ -1,10 +1,12 @@
 var express = require("express")
 var pool = require("../database/mysql")
 var employee = require("../query/employee")
+var empauth=require("../auth/empauth").otherMethod
 
 const router = express.Router();
 
-router.get('/', function (req, res, ) {
+
+router.get('/',empauth, function (req, res, ) {
     console.log(req.query);
 
     pool.query('select * from employee where id=?', [req.query.id], function (error, results, fields) {

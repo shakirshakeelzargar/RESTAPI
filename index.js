@@ -3,6 +3,7 @@ var cors = require("cors");
 var bodyParser = require("body-parser");
 
 var employee = require("../RESTAPI/api/employees");
+var login = require("../RESTAPI/auth/empauth").method
 
 var app = express();
 
@@ -21,7 +22,7 @@ app.use(bodyParser.urlencoded({
 
 app.use("/employee",employee);
 
-
+app.use("/login",login);
 //if we are here then the specified request is not found
 
 

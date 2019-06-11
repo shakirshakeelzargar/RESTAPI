@@ -90,6 +90,7 @@ app.get("/secret", passport.authenticate('jwt', { session: false }), function (r
     res.json({ message: "Success! You can not see this without a token" });
 });
 
+const empauth = passport.authenticate('jwt', { session: false })
 
 
 app.get('/employee', passport.authenticate('jwt', { session: false }), function (req, res, ) {
