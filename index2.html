@@ -8,18 +8,20 @@
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
     <script>
         function myFunction(){
-        var dataValue = $("#id").val();
+        var idvalue = $("#id").val();
+        var keyvalue=$("#key").val();
+       
         $.ajax({
                     type : 'get',
                     //remove the .php from results.php.php
                     url : "http://localhost:3000/employee",
                     //Add the request header
                     headers : {
-                        Authorization : 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNTYwMjgxOTA1fQ.9CUtx1L9_mGrAuwFu4bOcRXuPNCApxdWLv85vpvBlZ8'
+                        Authorization : 'Bearer ' + keyvalue
                     },
                     contentType : 'application/x-www-form-urlencoded',
                     //Add form data
-                    data : {id : dataValue},
+                    data : {id : idvalue,key : keyvalue},
                     success : function(response) {
                         $(".the-return").html(response)},
                     error : function(xhr, status, error) {
@@ -32,8 +34,12 @@
 
 <body>
         <form><!---Removed form submit url-->
-                <label>Enter Id:</label>
-            <input type="text" id="id" name="id" value="testValue">
+                
+           
+            <label>Enter key:</label>
+            <input type="password" id="key" name="key" value="">
+            <div> <label>Enter Id:</label>
+                <input type="text" id="id" name="id" value=""></div>
             <!---Id attribute added to input field to be submitted--->
             <input type="button" onclick="myFunction()" value="Submit">
             <!---Input type is button NOT submit--->
