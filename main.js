@@ -39,16 +39,10 @@ var strategy = new JwtStrategy(jwtOptions, function (jwt_payload, next) {
     }
 });
 
+//connecting database
+
+var pool=require("./database/mysql")
 passport.use(strategy);
-const pool = mysql.createPool({
-
-
-    host: 'northside.in',
-    user: 'shakir',
-    password: 'shakir123',
-    database: 'shakir_test'
-});
-
 var app = express();
 app.use(passport.initialize());
 app.use(methodOverride('_method'));
@@ -146,7 +140,7 @@ app.put('/employee', passport.authenticate('jwt', { session: false }), function 
 //rest api to delete record from mysql database
 app.delete('/employee', passport.authenticate('jwt', { session: false }), function (req, res) {
     console.log(req.body);
-    pool.query('DELETE FROM `employee` WHERE `id`=?', [req.body.id], function (error, results, fields) {
+    pool.query('DELETE FROM employee WHERE id=?', [req.body.id], function (error, results, fields) {
         var x = JSON.stringify(results);
         if (x === '{"fieldCount":0,"affectedRows":1,"insertId":0,"serverStatus":2,"warningCount":0,"message":"","protocol41":true,"changedRows":0}') {
 
@@ -156,9 +150,6 @@ app.delete('/employee', passport.authenticate('jwt', { session: false }), functi
 
     });
 });
-
-
-
 
 /*
 app.get("/secretDebug",
