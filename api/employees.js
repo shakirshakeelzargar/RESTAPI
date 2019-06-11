@@ -22,18 +22,51 @@ router.get('/', function (req, res, ) {
 });
 
 
-router.post("/add", (req, res, next) => {
 
-    //read product information from request
-    let product = new Product(req.body.prd_name, req.body.prd_price);
 
-    db.query(product.getAddProductSQL(), (err, data)=> {
-        res.status(200).json({
-            message:"Product added.",
-            productId: data.insertId
-        });
+router.post('/', function (req, res) {
+    var postData = req.body;
+    pool.query('INSERT INTO employee SET id=?,`name`=?,`salary`=?,`age`=?', [req.body.id, req.body.name, req.body.salary, req.body.age], function (error, results, fields) {
+        if (error) {
+            res.end('<h1><a href="http://northside.in/restapi/">Click Here To Go Back</a></h1>' + '<h2>ERROR: ID ALREADY EXISTS</h2>')
+        }
+        res.end('<h1><a href="http://northside.in/restapi/">Click Here To Go Back</a></h1>' + 'Record ' + [req.body.id] + ' has been Inserted!');
+
     });
 });
+
+
+
+
+router.put('/', function (req, res) {
+    pool.query('UPDATE `employee` SET `name`=?,`salary`=?,`age`=? where `id`=?', [req.body.name, req.body.salary, req.body.age, req.body.id], function (error, results, fields) {
+
+        var x = JSON.stringify(results);
+
+        if (x === '{"fieldCount":0,"affectedRows":1,"insertId":0,"serverStatus":2,"warningCount":0,"message":"(Rows matched: 1  Changed: 1  Warnings: 0","protocol41":true,"changedRows":1}') {
+            res.end('<h1><a href="http://northside.in/restapi/">Click Here To Go Back</a></h1>' + 'Record ' + [req.body.id] + ' has been Updated!');
+        }
+        res.end('<h1><a href="http://northside.in/restapi/">Click Here To Go Back</a></h1>' + '<h2>ERROR: No Such Row</h2>')
+
+    });
+});
+
+
+
+
+router.delete('/', function (req, res) {
+    console.log(req.body);
+    pool.query('DELETE FROM employee WHERE id=?', [req.body.id], function (error, results, fields) {
+        var x = JSON.stringify(results);
+        if (x === '{"fieldCount":0,"affectedRows":1,"insertId":0,"serverStatus":2,"warningCount":0,"message":"","protocol41":true,"changedRows":0}') {
+
+            res.end('<h1><a href="http://northside.in/restapi/">Click Here To Go Back</a></h1><p>' + 'Record ' + [req.body.id] + ' has been deleted!');
+        }
+        res.end('<h1><a href="http://northside.in/restapi/">Click Here To Go Back</a></h1><p>' + 'ERROR: NO Such ID');
+
+    });
+});
+
 /*
 router.get("/:productId", (req, res, next) => {
     let pid = req.params.productId;

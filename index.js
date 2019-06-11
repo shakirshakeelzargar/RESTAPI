@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-app.use("/employees",employee);
+app.use("/employee",employee);
 
 
 //if we are here then the specified request is not found
