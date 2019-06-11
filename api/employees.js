@@ -26,7 +26,7 @@ router.get('/',empauth, function (req, res, ) {
 
 
 
-router.post('/', function (req, res) {
+router.post('/',empauth, function (req, res) {
     var postData = req.body;
     pool.query('INSERT INTO employee SET id=?,`name`=?,`salary`=?,`age`=?', [req.body.id, req.body.name, req.body.salary, req.body.age], function (error, results, fields) {
         if (error) {
@@ -40,7 +40,7 @@ router.post('/', function (req, res) {
 
 
 
-router.put('/', function (req, res) {
+router.put('/',empauth,function (req, res) {
     pool.query('UPDATE `employee` SET `name`=?,`salary`=?,`age`=? where `id`=?', [req.body.name, req.body.salary, req.body.age, req.body.id], function (error, results, fields) {
 
         var x = JSON.stringify(results);
@@ -56,7 +56,7 @@ router.put('/', function (req, res) {
 
 
 
-router.delete('/', function (req, res) {
+router.delete('/',empauth, function (req, res) {
     console.log(req.body);
     pool.query('DELETE FROM employee WHERE id=?', [req.body.id], function (error, results, fields) {
         var x = JSON.stringify(results);
