@@ -2,7 +2,7 @@ var express = require("express");
 var cors = require("cors");
 var bodyParser = require("body-parser");
 
-var employee = require("../RESTAPI/api/employees");
+var employee = require("./controllers/employee-controller");
 var login = require("../RESTAPI/auth/empauth").method
 
 var app = express();
