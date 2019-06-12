@@ -3,7 +3,7 @@ var pool = require("../database/mysql")
 var employee = require("../query/employee")
 var empauth=require("../auth/empauth").otherMethod
 const methodOverride = require('method-override');
-
+var empquery = require("../query/empquery")
 
 const router = express.Router();
 router.use(methodOverride('_method'));
@@ -32,7 +32,7 @@ router.get('/',empauth, function (req, res, ) {
 
 router.post('/',empauth, function (req, res) {
     var postData = req.body;
-    pool.query('INSERT INTO employee SET id=?,`name`=?,`salary`=?,`age`=?', [req.body.id, req.body.name, req.body.salary, req.body.age], function (error, results, fields) {
+    empquery.addEmployee( [req.body.id, req.body.name, req.body.salary, req.body.age], function (error, results, fields) {
         if (error) {
             res.end('<h1><a href="http://northside.in/restapi/">Click Here To Go Back</a></h1>' + '<h2>ERROR: ID ALREADY EXISTS</h2>')
         }
@@ -62,7 +62,7 @@ router.put('/',empauth,function (req, res) {
 
 router.delete('/',empauth, function (req, res) {
     console.log(req.body);
-    pool.query('DELETE FROM employee WHERE id=?', [req.body.id], function (error, results, fields) {
+    empquery.deleteEmployee( [req.body.id], function (error, results, fields) {
         var x = JSON.stringify(results);
         if (x === '{"fieldCount":0,"affectedRows":1,"insertId":0,"serverStatus":2,"warningCount":0,"message":"","protocol41":true,"changedRows":0}') {
 
