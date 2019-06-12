@@ -21,9 +21,3 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use("/employee",employee);
-
-app.use("/login",login);
-//if we are here then the specified request is not found
-
-
-module.exports = app;
