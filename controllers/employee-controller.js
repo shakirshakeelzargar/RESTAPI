@@ -1,6 +1,11 @@
 var express = require("express")
 var pool = require("../database/mysql")
 var empauth=require("../auth/empauth").otherMethod
+var newlogin = require("../auth/newlogin").otherMethod
+
+
+
+
 const methodOverride = require('method-override');
 var empquery = require("./empquery-controller")
 
@@ -9,7 +14,7 @@ router.use(methodOverride('_method'));
 
 
 
-router.get('/',empauth, function (req, res, ) {
+router.get('/',newlogin, function (req, res, ) {
     console.log(req.query);
 
     pool.query('select * from employee where id=?', [req.query.id], function (error, results, fields) {

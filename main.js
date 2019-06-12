@@ -4,6 +4,7 @@ var bodyParser = require("body-parser");
 
 var employee = require("./controllers/employee-controller");
 var login = require("../RESTAPI/auth/empauth").method
+var newlogin=require("../RESTAPI/auth/newlogin").method
 
 var app = express();
 
@@ -22,3 +23,4 @@ app.use(bodyParser.urlencoded({
 
 app.use("/employee",employee);
 app.use("/login",login)
+app.use("/newlogin",newlogin)
