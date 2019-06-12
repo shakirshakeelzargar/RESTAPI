@@ -67,7 +67,7 @@ obj.post("/login", function (req, res) {
     // usually this would be a database call:
     var user = users[_.findIndex(users, { name: name })];
     if (!user) {
-        res.status(401).json({ message: "no such user found" });
+        res.end( "<p><h2>no such user found<h2>" );
     }
 
     if (user.password === req.body.password) {
@@ -76,9 +76,9 @@ obj.post("/login", function (req, res) {
         // var token = 'BEARER '+jwt.sign(payload, jwtOptions.secretOrKey);
         var token = 'BEARER '+jwt.sign(payload, jwtOptions.secretOrKey);
 
-        res.json({ message: "Successfully Logged In", Your_token_is: token });
+        res.end( "<p><h2>Successfully Logged In, Kindly Copy your token</h2></p>" + '<p>' +  token + '<p><h2><a href="http://northside.in/restapi/">Click Here To access REST API</a></h2></p>');
     } else {
-        res.status(401).json({ message: "passwords did not match" });
+        res.end("<p><h2>Your password is incorrect" );
     }
 });
 

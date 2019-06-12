@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"></html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script>
+        function myFunction(){
+        var name = $("#name").val();
+        var password=$("#password").val();
+       
+        $.ajax({
+                    type : 'post',
+                    //remove the .php from results.php.php
+                    url : "http://localhost:3000/login/login",
+                    //Add the request header
+                    
+                    contentType : 'application/x-www-form-urlencoded',
+                    //Add form data
+                    data : {name : name,password : password},
+                    success : function(response) {
+                        $(".the-return").html(response)},
+                    error : function(xhr, status, error) {
+                        var err = eval("(" + xhr.responseText + ")");
+                        console.log(err);                   
+                    }
+                }); //End of Ajax
+        } </script>
+</head>
+
+<body>
+        <form><!---Removed form submit url-->
+                
+           
+            <label>Enter user:</label>
+            <input type="text" id="name" name="name" value="">
+            <div> <label>Enter pass:</label>
+                <input type="password" id="password" name="password" value=""></div>
+            <!---Id attribute added to input field to be submitted--->
+            <input type="button" onclick="myFunction()" value="Submit">
+            <!---Input type is button NOT submit--->
+            </form>
+            <div class="the-return">
+               
+              </div>
+</body>
+</html>

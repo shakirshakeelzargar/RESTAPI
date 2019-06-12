@@ -2,8 +2,12 @@ var express = require("express")
 var pool = require("../database/mysql")
 var employee = require("../query/employee")
 var empauth=require("../auth/empauth").otherMethod
+const methodOverride = require('method-override');
+
 
 const router = express.Router();
+router.use(methodOverride('_method'));
+
 
 
 router.get('/',empauth, function (req, res, ) {

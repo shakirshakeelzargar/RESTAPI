@@ -10,18 +10,24 @@
         function myFunction(){
         var idvalue = $("#id").val();
         var keyvalue=$("#key").val();
+        var namevalue = $("#name").val();
+
+        var salaryvalue = $("#salary").val();
+
+        var agevalue = $("#age").val();
+
        
         $.ajax({
-                    type : 'get',
+                    type : 'post',
                     //remove the .php from results.php.php
                     url : "http://localhost:3000/employee",
                     //Add the request header
                     headers : {
-                        Authorization : 'Bearer ' + keyvalue
+                        Authorization :  keyvalue
                     },
                     contentType : 'application/x-www-form-urlencoded',
                     //Add form data
-                    data : {id : idvalue,key : keyvalue},
+                    data : {id : idvalue,key : keyvalue,name:namevalue,salary:salaryvalue,age:agevalue},
                     success : function(response) {
                         $(".the-return").html(response)},
                     error : function(xhr, status, error) {
@@ -40,6 +46,12 @@
             <input type="password" id="key" name="key" value="">
             <div> <label>Enter Id:</label>
                 <input type="text" id="id" name="id" value=""></div>
+                <div> <label>Enter Name:</label>
+                    <input type="text" id="name" name="name" value=""></div>
+                    <div> <label>Enter Salary:</label>
+                        <input type="text" id="salary" name="salary" value=""></div>
+                        <div> <label>Enter Age:</label>
+                            <input type="text" id="age" name="age" value=""></div>
             <!---Id attribute added to input field to be submitted--->
             <input type="button" onclick="myFunction()" value="Submit">
             <!---Input type is button NOT submit--->
