@@ -237,18 +237,24 @@
         function myFunction(){
         var idvalue = $("#id").val();
         var keyvalue=$("#key").val();
+        var namevalue = $("#name").val();
+
+        var salaryvalue = $("#salary").val();
+
+        var agevalue = $("#age").val();
+
        
         $.ajax({
                     type : 'post',
                     //remove the .php from results.php.php
-                    url : "http://localhost:3000/employee?_method=DELETE",
+                    url : "http://localhost:3000/employee?_method=PUT",
                     //Add the request header
                     headers : {
                         Authorization :  keyvalue
                     },
                     contentType : 'application/x-www-form-urlencoded',
                     //Add form data
-                    data : {id : idvalue,key : keyvalue},
+                    data : {id : idvalue,key : keyvalue,name:namevalue,salary:salaryvalue,age:agevalue},
                     success : function(response) {
                         $(".result").html(response)},
                     error : function(xhr, status, error) {
@@ -263,35 +269,48 @@
         <div class="header">
                 <a href="#default" class="logo">Welcome To REST API</a>
                 <div class="header-right">
-                  <a  href="./login.html">Login</a>
+                  <a href="./login.html">Login</a>
                   <a href="./get.html">Get</a>
                   <a href="./post.html">Post</a>
-                  <a href="./put.html">Put</a>
-                  <a class="active" href="./delete.html">Delete</a>
+                  <a class="active" href="./put.html">Put</a>
+                  <a href="./delete.html">Delete</a>
 
 
                 </div>
               </div>
         <form><!---Removed form submit url-->
-            <h1>DELETE FORM</h1>
+                
+            <h1>PUT/UPDATE FORM</h1>
             <div class="inset">
                 <p>
             </div>
                 
            
-            <label for="email">ENTER TOKEN </label>
+            <label for="email">ENTER YOUR TOKEN </label>
             <input type="password" id="key" name="key" value="">
         </p>
         <p>
-                <label for="password">ID TO DELETE</label>
+            <label for="email">ENTER ID TO EDIT </label>
                 <input type="text" id="id" name="id" value=""></div>
             </p>
         </div>
-        <p class="p-container">
-                <!---Id attribute added to input field to be submitted--->
+                <label for="email">ENTER NEW NAME </label>
+                <input type="text" id="name" name="name" value=""></div>
+            </p>
+        </div>
+                <label for="email">ENTER  NEW SALARY </label>
+                <input type="text" id="salary" name="salary" value=""></div>
+            </p>
+        </div>
+                <label for="email">ENTER NEW AGE </label>
+                <input type="text" id="age" name="age" value=""></div>
+            <!---Id attribute added to input field to be submitted--->
+            <p class="p-container">
+
             <input type="button" onclick="myFunction()" value="Submit">
             <!---Input type is button NOT submit--->
         </p>
+
             </form>
             <div class="result">
                
