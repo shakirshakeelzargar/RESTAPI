@@ -67,7 +67,7 @@ obj.post("/login", function (req, res) {
     // usually this would be a database call:
     var user = users[_.findIndex(users, { name: name })];
     if (!user) {
-        res.end( "<p><h2>no such user found<h2>" );
+        res.end("<p><h2>no such user found<h2>");
     }
 
     if (user.password === req.body.password) {
@@ -75,11 +75,11 @@ obj.post("/login", function (req, res) {
         var payload = { id: user.id };
         console.log(payload)
         // var token = 'BEARER '+jwt.sign(payload, jwtOptions.secretOrKey);
-        var token = 'BEARER '+jwt.sign(payload, jwtOptions.secretOrKey);
+        var token = 'BEARER ' + jwt.sign(payload, jwtOptions.secretOrKey);
 
-        res.end( "<p><h2>Successfully Logged In, Kindly Copy your token</h2></p>" + '<p>' +  token + '<p><h2><a href="http://northside.in/restapi/">Click Here To access REST API</a></h2></p>');
+        res.end("<p><h2>Successfully Logged In, Kindly Copy your token</h2></p>" + '<p>' + token + '<p><h2><a href="http://northside.in/restapi/">Click Here To access REST API</a></h2></p>');
     } else {
-        res.end("<p><h2>Your password is incorrect" );
+        res.end("<p><h2>Your password is incorrect");
     }
 });
 
@@ -90,7 +90,7 @@ obj.get("/secret", passport.authenticate('jwt', { session: false }), function (r
 });
 
 //var server = app.listen(process.env.PORT || 3000, function () {
-   //console.log('Your node js server is running');
+//console.log('Your node js server is running');
 //});
 
 

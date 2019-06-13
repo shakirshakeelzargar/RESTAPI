@@ -1,7 +1,7 @@
 var express = require("express")
 var pool = require("../database/mysql")
-var empauth=require("../auth/empauth").otherMethod
-var newlogin = require("../auth/newlogin").otherMethod
+var empauth = require("../auth/empauth").otherMethod
+
 
 
 
@@ -14,10 +14,10 @@ router.use(methodOverride('_method'));
 
 
 
-router.get('/',newlogin, function (req, res, ) {
+router.get('/', empauth, function (req, res, ) {
     console.log(req.query);
 
-    pool.query('select * from employee where id=?', [req.query.id], function (error, results, fields) {
+    empquery.getEmployee([req.query.id], function (error, results, fields) {
         var x = JSON.stringify(results);
         if (x === '[]') {
             res.end('<h1><a href="http://northside.in/restapi/">Click Here To Go Back</a></h1>' + '<h2>ERROR: No Such ID<h2>')
@@ -34,9 +34,9 @@ router.get('/',newlogin, function (req, res, ) {
 
 
 
-router.post('/',empauth, function (req, res) {
+router.post('/', empauth, function (req, res) {
     var postData = req.body;
-    empquery.addEmployee( [req.body.id, req.body.name, req.body.salary, req.body.age], function (error, results, fields) {
+    empquery.addEmployee([req.body.id, req.body.name, req.body.salary, req.body.age], function (error, results, fields) {
         if (error) {
             res.end('<h1><a href="http://northside.in/restapi/">Click Here To Go Back</a></h1>' + '<h2>ERROR: ID ALREADY EXISTS</h2>')
         }
@@ -48,8 +48,8 @@ router.post('/',empauth, function (req, res) {
 
 
 
-router.put('/',empauth,function (req, res) {
-    pool.query('UPDATE `employee` SET `name`=?,`salary`=?,`age`=? where `id`=?', [req.body.name, req.body.salary, req.body.age, req.body.id], function (error, results, fields) {
+router.put('/', empauth, function (req, res) {
+    empquery.updateEmployee([req.body.name, req.body.salary, req.body.age, req.body.id], function (error, results, fields) {
 
         var x = JSON.stringify(results);
 
@@ -64,9 +64,9 @@ router.put('/',empauth,function (req, res) {
 
 
 
-router.delete('/',empauth, function (req, res) {
+router.delete('/', empauth, function (req, res) {
     console.log(req.body);
-    empquery.deleteEmployee( [req.body.id], function (error, results, fields) {
+    empquery.deleteEmployee([req.body.id], function (error, results, fields) {
         var x = JSON.stringify(results);
         if (x === '{"fieldCount":0,"affectedRows":1,"insertId":0,"serverStatus":2,"warningCount":0,"message":"","protocol41":true,"changedRows":0}') {
 
