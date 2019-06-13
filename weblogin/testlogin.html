@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en"></html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="./login.js"></script>
+        
+</head>
+
+<body>
+        <!--Size dropdown menu-->
+<select id="size_select">
+        <option value="SELECT">SELECT A VALUE</option>
+
+    <option value="login">login</option>
+    <option value="get">get</option>
+    <option value="post">post</option>
+        <option value="delete">delete</option>
+        <option value="update">update</option>
+  </select>
+  
+  <!--Size dropdown content-->
+  <div id="login" class="size_chart">
+    <form><!---Removed form submit url-->
+                
+           
+        <label>Enter user:</label>
+        <input type="text" id="name" name="name" value="">
+        <div> <label>Enter pass:</label>
+            <input type="password" id="password" name="password" value=""></div>
+        <!---Id attribute added to input field to be submitted--->
+        <input type="button" onclick="myFunction()" value="Submit">
+        <!---Input type is button NOT submit--->
+        </form>
+        <div class="login">
+           
+          </div>
+  </div>
+
+
+
+
+
+  <div id="get" class="size_chart">
+    <form><!---Removed form submit url-->
+                
+           
+        <label>Enter key:</label>
+        <input type="password" id="key" name="key" value="">
+        <div> <label>Enter Id:</label>
+            <input type="text" id="id" name="id" value=""></div>
+        <!---Id attribute added to input field to be submitted--->
+        <input type="button" onclick="myFunction2()" value="Submit">
+        <!---Input type is button NOT submit--->
+        </form>
+        <div class="get">
+           
+          </div>
+  </div>
+
+
+
+
+
+  <div id="post" class="size_chart">
+        <form><!---Removed form submit url-->
+                
+           
+            <label>Enter key:</label>
+            <input type="password" id="key" name="key" value="">
+            <div> <label>Enter Id:</label>
+                <input type="text" id="id" name="id" value=""></div>
+                <div> <label>Enter Name:</label>
+                    <input type="text" id="name" name="name" value=""></div>
+                    <div> <label>Enter Salary:</label>
+                        <input type="text" id="salary" name="salary" value=""></div>
+                        <div> <label>Enter Age:</label>
+                            <input type="text" id="age" name="age" value=""></div>
+            <!---Id attribute added to input field to be submitted--->
+            <input type="button" onclick="myFunction3()" value="Submit">
+            <!---Input type is button NOT submit--->
+            </form>
+            <div class="post">
+               
+              </div>
+  </div>
+  <div id="update" class="size_chart">
+        <form><!---Removed form submit url-->
+                
+           
+            <label>Enter key:</label>
+            <input type="password" id="key" name="key" value="">
+            <div> <label>Enter Id:</label>
+                <input type="text" id="id" name="id" value=""></div>
+                <div> <label>Enter Name:</label>
+                    <input type="text" id="name" name="name" value=""></div>
+                    <div> <label>Enter Salary:</label>
+                        <input type="text" id="salary" name="salary" value=""></div>
+                        <div> <label>Enter Age:</label>
+                            <input type="text" id="age" name="age" value=""></div>
+            <!---Id attribute added to input field to be submitted--->
+            <input type="button" onclick="myFunction5()" value="Submit">
+            <!---Input type is button NOT submit--->
+            </form>
+            <div class="update">
+               
+              </div>
+       
+      </div>
+
+
+
+
+  <div id="delete" class="size_chart">
+        <form><!---Removed form submit url-->
+                
+           
+            <label>Enter key:</label>
+            <input type="password" id="key" name="key" value="">
+            <div> <label>Enter Id:</label>
+                <input type="text" id="id" name="id" value=""></div>
+            <!---Id attribute added to input field to be submitted--->
+            <input type="button" onclick="myFunction4()" value="Submit">
+            <!---Input type is button NOT submit--->
+            </form>
+            <div class="delete">
+               
+              </div>
+  </div>
+
+
+
+
+  
+
+
+
+
+
+
+</html>
