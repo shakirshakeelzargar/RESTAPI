@@ -59,7 +59,7 @@ obj.get("/", function (req, res) {
     res.json({ message: "Express is up!" });
 });
 
-obj.post("/login", function (req, res) {
+obj.post("/", function (req, res) {
     if (req.body.name && req.body.password) {
         var name = req.body.name;
         var password = req.body.password;
