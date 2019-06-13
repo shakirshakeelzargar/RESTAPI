@@ -67,7 +67,7 @@ obj.post("/login", function (req, res) {
     // usually this would be a database call:
     var user = users[_.findIndex(users, { name: name })];
     if (!user) {
-        res.end("<p><h2>no such user found<h2>");
+        res.end("<p><h2>Incorrect Username<h2>");
     }
 
     if (user.password === req.body.password) {
