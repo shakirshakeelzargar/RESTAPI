@@ -235,7 +235,7 @@ body {
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
     <script>
         function myFunction(){
-        var username = $("#username").val();
+        var name = $("#name").val();
         var password=$("#password").val();
        
         $.ajax({
@@ -246,7 +246,7 @@ body {
                     
                     contentType : 'application/x-www-form-urlencoded',
                     //Add form data
-                    data : {username : username,password : password},
+                    data : {name : name,password : password},
                     success : function(response) {
                         $(".result").html(response)},
                     error : function(xhr, status, error) {
@@ -276,7 +276,7 @@ body {
                 <p>
             </div>
             <label for="email">USERNAME </label>
-            <input type="text" id="username" name="username" value="">
+            <input type="text" id="name" name="name" value="">
         </p>
         <p>
             <label for="password">PASSWORD</label>

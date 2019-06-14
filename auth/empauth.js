@@ -1,6 +1,3 @@
-
-
-var pool= require("../database/mysql")
 var express = require("express");
 var bodyParser = require("body-parser");
 var jwt = require('jsonwebtoken');
@@ -15,13 +12,13 @@ var JwtStrategy = passportJWT.Strategy;
 
 var users = [
     {
-        secret: 1,
-        username: 'shakir@northside.in',
-        password: 'shakir123'
+        id: 1,
+        name: 'shakir',
+        password: 'shakir'
     },
     {
-        secret: 2,
-        username: 'test',
+        id: 2,
+        name: 'test',
         password: 'test'
     }
 ];
@@ -62,28 +59,28 @@ obj.get("/", function (req, res) {
     res.json({ message: "Express is up!" });
 });
 
-obj.post("/", function (request, response) {
-    var username = request.body.username;
-    var password = request.body.password;
-    var secret=1
-	if (username && password) {
-		pool.query('SELECT * FROM shakir_admin WHERE username = ? AND password = ?', [username, password], function(error, results, fields) {
-			if (results.length > 0) {
-                var user = users[_.findIndex(users, { username: username })];
+obj.post("/", function (req, res) {
+    if (req.body.name && req.body.password) {
+        var name = req.body.name;
+        var password = req.body.password;
+    }
+    // usually this would be a database call:
+    var user = users[_.findIndex(users, { name: name })];
+    if (!user) {
+        res.end("<p><h2>Incorrect Username<h2>");
+    }
 
-                var payload = { id: user.id };
-                console.log(payload)
-                console.log(user)
-                // var token = 'BEARER '+jwt.sign(payload, jwtOptions.secretOrKey);
-                var token = 'BEARER ' + jwt.sign(payload, jwtOptions.secretOrKey);
-        
-                response.send("<p><h2>Successfully Logged In, Kindly Copy your token</h2></p>" + '<p>' + token + '<p><h2><a href="http://northside.in/restapi/">Click Here To access REST API</a></h2></p>');
-			} else {
-				response.send('Incorrect Username and/or Password!');
-			}			
-			
-		});
-	}
+    if (user.password === req.body.password) {
+        // from now on we'll identify the user by the id and the id is the only personalized value that goes into our token
+        var payload = { id: user.id };
+        console.log(payload)
+        // var token = 'BEARER '+jwt.sign(payload, jwtOptions.secretOrKey);
+        var token = 'BEARER ' + jwt.sign(payload, jwtOptions.secretOrKey);
+
+        res.end("<p><h2>Successfully Logged In, Kindly Copy your token</h2></p>" + '<p>' + token );
+    } else {
+        res.end("<p><h2>Your password is incorrect");
+    }
 });
 
 
@@ -101,4 +98,3 @@ module.exports = {
     method: obj,
     otherMethod: passport.authenticate('jwt', { session: false })
 }
-
