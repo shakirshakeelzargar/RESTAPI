@@ -6,6 +6,7 @@ var employee = require("./controllers/employee-controller");
 var login = require("../RESTAPI/auth/empauth").method
 
 var app = express();
+//var empauth=require("./auth/empauth").method
 
 
 
@@ -22,3 +23,5 @@ app.use(bodyParser.urlencoded({
 
 app.use("/employee", employee);
 app.use("/login", login)
+//app.use("/auth/",empauth)
+//app.use("/home",empauth)
