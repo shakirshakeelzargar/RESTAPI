@@ -12,6 +12,7 @@ The dependencies/concepts used in this code are:
 - [x] Http Headers
 - [x] Html
 - [x] Css
+- [x] MySql
 
 
 
