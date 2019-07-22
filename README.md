@@ -1,4 +1,4 @@
-# Practice Python
+# RestAPI USing NodeJS
 
 This repo contains an example of RESTFUL API USING NodeJS
 
