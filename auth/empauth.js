@@ -5,6 +5,7 @@ const methodOverride = require('method-override');
 var passport = require("passport");
 var passportJWT = require("passport-jwt");
 var _ = require("lodash");
+var path = require("path");
 
 var ExtractJwt = passportJWT.ExtractJwt;
 var JwtStrategy = passportJWT.Strategy;
@@ -56,7 +57,9 @@ obj.use(bodyParser.urlencoded({
 obj.use(bodyParser.json())
 
 obj.get("/", function (req, res) {
-    res.json({ message: "Express is up!" });
+    //res.json({ message: "Express is up!" });
+    var rootpath=path.dirname(require.main.filename || process.mainModule.filename);
+    res.sendFile(path.join(rootpath + '/weblogin/login.html'));
 });
 
 obj.post("/", function (req, res) {
