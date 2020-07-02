@@ -25,5 +25,3 @@ app.use(bodyParser.urlencoded({
 app.use("/employee", employee);
 app.use("/login", login)
 app.use("/", webroute)
-
-webroute

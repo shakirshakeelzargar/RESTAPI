@@ -4,6 +4,8 @@ var bodyParser = require("body-parser");
 
 var employee = require("./controllers/employee-controller");
 var login = require("./auth/empauth").method
+var webroute = require("./webroutes/webroute").method
+
 
 var app = express();
 
@@ -22,3 +24,4 @@ app.use(bodyParser.urlencoded({
 
 app.use("/employee", employee);
 app.use("/login", login)
+app.use("/", webroute)
