@@ -13,13 +13,13 @@ var JwtStrategy = passportJWT.Strategy;
 var users = [
     {
         id: 1,
-        name: 'shakir',
-        password: 'shakir'
+        name: process.env.ADMIN_1_USER ,
+        password: process.env.ADMIN_1_PASS
     },
     {
         id: 2,
-        name: 'test',
-        password: 'test'
+        name: process.env.ADMIN_2_USER,
+        password: process.env.ADMIN_2_PASS
     }
 ];
 
@@ -77,7 +77,7 @@ obj.post("/", function (req, res) {
         // var token = 'BEARER '+jwt.sign(payload, jwtOptions.secretOrKey);
         var token = 'BEARER ' + jwt.sign(payload, jwtOptions.secretOrKey);
 
-        res.end("<p><h2>Successfully Logged In, Kindly Copy your token</h2></p>" + '<p>' + token );
+        res.end("<p><h2>Successfully Logged In, Kindly Copy your token and goto GET,POST,PUT OR DELETE PAGE.</h2></p>" + '<p>' + token );
     } else {
         res.end("<p><h2>Your password is incorrect");
     }

@@ -20,7 +20,7 @@ router.get('/', empauth, function (req, res, ) {
     empquery.getEmployee([req.query.id], function (error, results, fields) {
         var x = JSON.stringify(results);
         if (x === '[]') {
-            res.end( '<h2>ERROR: No Such ID<h2>')
+            res.end('<h2>ERROR: No Such ID<h2>')
         }
         //res.end(JSON.stringify(results));
         res.end( JSON.stringify(results));
@@ -38,7 +38,8 @@ router.post('/', empauth, function (req, res) {
     var postData = req.body;
     empquery.addEmployee([req.body.id, req.body.name, req.body.salary, req.body.age], function (error, results, fields) {
         if (error) {
-            res.end( '<h2>ERROR: ID ALREADY EXISTS</h2>')
+            console.log("Error in post is: ",error)
+            res.end( 'ERROR: ID ALREADY EXISTS')
         }
         res.end( 'Record ' + [req.body.id] + ' has been Inserted!');
 
@@ -56,7 +57,7 @@ router.put('/', empauth, function (req, res) {
         if (x === '{"fieldCount":0,"affectedRows":1,"insertId":0,"serverStatus":2,"warningCount":0,"message":"(Rows matched: 1  Changed: 1  Warnings: 0","protocol41":true,"changedRows":1}') {
             res.end( 'Record ' + [req.body.id] + ' has been Updated!');
         }
-        res.end( '<h2>ERROR: No Such Row</h2>')
+        res.end('<h2>ERROR: No Such ID</h2>')
 
     });
 });

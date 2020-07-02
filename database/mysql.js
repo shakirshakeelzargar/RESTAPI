@@ -4,10 +4,10 @@ var mysql      = require('mysql');
 const pool = mysql.createPool({
 
 
-    host: 'northside.in',
-    user: 'shakir',
-    password: 'shakir123',
-    database: 'shakir_test'
+    host: process.env.DB_HOST    ,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_DATABASE
 });
 
 
