@@ -7,6 +7,61 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <title>Document</title>
     <style>
+.popup {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 270px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  color:rgba(0,0,0,0.4);
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close-popup {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close-popup:hover,
+.close-popup:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+
+    .modal {
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 ) 
+                url('http://i.stack.imgur.com/FhHRx.gif') 
+                50% 50% 
+                no-repeat;
+}
+
+
         /* NOTE: The styles were added inline because Prefixfree needs access to your styles and they must be inlined if they are on local disk! */
         * {
     box-sizing: border-box;
@@ -234,23 +289,41 @@ body {
   
       </style>
     <script type="text/javascript" src="./jquery-1.7.1.min.js"></script>
+
     <script>
-        function myFunction(){
+    
+    $body = $("body");
+    function sleep(){
+      setTimeout(function(){
+        
+        return 12
+}, 5000);
+    }
+   function myFunction(){
         var name = $("#name").val();
         var password=$("#password").val();
        
         $.ajax({
+          
                     type : 'post',
                     //remove the .php from results.php.php
                     url : "http://localhost:3000/login",
+                    beforeSend: function() { $('.modal').css('display', 'block');},
+                        complete: function() { $('.modal').css('display', 'none');},
+                        
                     //Add the request header
                     
                     contentType : 'application/x-www-form-urlencoded',
                     //Add form data
                     data : {name : name,password : password},
+                     
                     success : function(response) {
-                        $(".result").html(response)},
+                      $('.popup').css('display', 'block');
+
+                        $(".popup-text").html(response)},
                     error : function(xhr, status, error) {
+                      $('.modal').css('display', 'none');
+                      $(".popup-text").html(error)
                         var err = eval("(" + xhr.responseText + ")");
                         console.log(err);                   
                     }
@@ -285,13 +358,29 @@ body {
             </p>
         </div>
         <p class="p-container">
-            <!---Id attribute added to input field to be submitted--->
             <input type="button" onclick="myFunction()" value="Submit">
         </p>
-            <!---Input type is button NOT submit--->
             </form>
-            <div class="result">
+            <div class="result-old">
                
               </div>
+              <div class="modal"><!-- Place at bottom of page --></div>
+              <div id="myModal" class="popup">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close-popup">&times;</span>
+    <div class="popup-text">
+    </div>
+  </div>
+
+</div>
 </body>
+<script>
+$('.modal').css('display', 'none');
+var span = document.getElementsByClassName("close-popup")[0];
+span.onclick = function() {
+  $('.popup').css('display', 'none');
+}
+</script>
 </html>

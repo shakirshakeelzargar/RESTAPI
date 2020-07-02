@@ -7,6 +7,18 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <title>Document</title>
     <style>
+    .modal {
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 ) 
+                url('http://i.stack.imgur.com/FhHRx.gif') 
+                50% 50% 
+                no-repeat;
+}
             /* NOTE: The styles were added inline because Prefixfree needs access to your styles and they must be inlined if they are on local disk! */
             * {
         box-sizing: border-box;
@@ -243,6 +255,8 @@
                     type : 'post',
                     //remove the .php from results.php.php
                     url : "http://localhost:3000/employee?_method=DELETE",
+                    beforeSend: function() { $('.modal').css('display', 'block');},
+                        complete: function() { $('.modal').css('display', 'none');},
                     //Add the request header
                     headers : {
                         Authorization :  keyvalue
@@ -253,6 +267,8 @@
                     success : function(response) {
                         $(".result").html(response)},
                     error : function(xhr, status, error) {
+                      $('.modal').css('display', 'none');
+                        $(".result").html(error)
                         var err = eval("(" + xhr.responseText + ")");
                         console.log(err);                   
                     }
@@ -289,13 +305,15 @@
             </p>
         </div>
         <p class="p-container">
-                <!---Id attribute added to input field to be submitted--->
             <input type="button" onclick="myFunction()" value="Submit">
-            <!---Input type is button NOT submit--->
         </p>
             </form>
             <div class="result">
                
               </div>
+              <div class="modal"><!-- Place at bottom of page --></div>
 </body>
+<script>
+$('.modal').css('display', 'none');
+</script>
 </html>
